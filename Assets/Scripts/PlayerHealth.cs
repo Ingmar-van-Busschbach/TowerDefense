@@ -4,23 +4,60 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PlayerHealth : HealthSystem
+public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private GameObject textObject;
-    private Text _text;
-
-    public void Start()
+    [SerializeField] private float _health = 10.0f;
+    [SerializeField] private Image _healthBarCore;
+    [SerializeField] private Gradient damagedGradient;
+    private int _targetHealth;
+    private int _startHealth;
+    void Start()
     {
-        _text = textObject.GetComponent<Text>();
-        _text.text = "Health: " + health;
+        _targetHealth = (int)_health;
+        _startHealth = (int)_health;
+        GameEvents.current.onDealPlayerDamage += DealDamage;
     }
 
-    public override void OnDeath()
+    private void DealDamage(int damage)
     {
-        SceneManager.LoadScene("GameOverScene");
+        _targetHealth -= damage;
+        if (_targetHealth <= 0)
+        {
+            OnDeath();
+        }
+        else
+        {
+            StartCoroutine(AnimateDamage());
+            OnDamaged(damage);
+        }
     }
-    public override void OnDamaged()
+
+    private void OnDamaged(int damage)
     {
-        _text.text = "Health: " + health;
+        //Debug.Log("Player Takes " + damage + " Damage");
+        //Debug.Log("Player Has " + _targetHealth + " Health Left");
+    }
+    private void OnDeath()
+    {
+        StartCoroutine(AnimateDamage());
+        SceneManager.LoadScene("GameOver");
+    }
+
+    IEnumerator AnimateDamage()
+    {
+        var currentHealth = _health;
+        Debug.Log(currentHealth);
+        Debug.Log(_targetHealth);
+        var t = 0.0f;
+        while (_health != _targetHealth)
+        {
+            _health = Mathf.Lerp(currentHealth, _targetHealth, t);
+            Debug.Log(_health);
+            var healthBarTransform = _healthBarCore.transform as RectTransform;
+            healthBarTransform.sizeDelta = new Vector2(_health*100/_startHealth, healthBarTransform.sizeDelta.y);
+            _healthBarCore.color = damagedGradient.Evaluate(t);
+            t += 0.25f;
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 }

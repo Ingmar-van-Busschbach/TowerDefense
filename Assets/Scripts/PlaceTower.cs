@@ -44,7 +44,7 @@ public class PlaceTower : MonoBehaviour
     {
         Vector3 placeBlockPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this.transform.position.y));
         _preview.transform.position = placeBlockPosition;
-        float scale = _selectedTower.GetComponent<TowerRangeCheck>()._range;
+        float scale = _selectedTower.GetComponent<TowerRangeCheck>()._range * 2;
         _preview.transform.localScale = new Vector3(scale, scale, scale);
         if (Input.GetButton("Fire1") && Time.time > _nextPlace)
         {

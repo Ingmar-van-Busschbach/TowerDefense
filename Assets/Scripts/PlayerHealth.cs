@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -27,7 +26,6 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            StartCoroutine(AnimateDamage());
             OnDamaged(damage);
         }
     }
@@ -36,11 +34,12 @@ public class PlayerHealth : MonoBehaviour
     {
         //Debug.Log("Player Takes " + damage + " Damage");
         //Debug.Log("Player Has " + _targetHealth + " Health Left");
+        StartCoroutine(AnimateDamage());
     }
     private void OnDeath()
     {
         StartCoroutine(AnimateDamage());
-        SceneManager.LoadScene("GameOver");
+        GameEvents.current.PlayerGameOver();
     }
 
     IEnumerator AnimateDamage()

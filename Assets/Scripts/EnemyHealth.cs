@@ -39,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
     }
     private void OnDeath()
     {
+        GameEvents.current.AddPlayerScore(1);
         Destroy(this.gameObject);
     }
 }

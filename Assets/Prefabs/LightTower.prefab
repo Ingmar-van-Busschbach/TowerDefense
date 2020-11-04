@@ -26,6 +26,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightTower
       objectReference: {fileID: 0}
+    - target: {fileID: 1682241042808595066, guid: da693d628d510aa4e9921a5768a30646,
+        type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682241042808595067, guid: da693d628d510aa4e9921a5768a30646,
+        type: 3}
+      propertyPath: _range
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1682241042808595070, guid: da693d628d510aa4e9921a5768a30646,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -80,16 +90,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1682241042808595066, guid: da693d628d510aa4e9921a5768a30646,
-        type: 3}
-      propertyPath: m_Radius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1682241042808595067, guid: da693d628d510aa4e9921a5768a30646,
-        type: 3}
-      propertyPath: _range
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1682241042961001505, guid: da693d628d510aa4e9921a5768a30646,
         type: 3}
